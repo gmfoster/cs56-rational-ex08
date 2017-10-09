@@ -74,5 +74,53 @@ public class Rational {
 	System.out.println("r.getDenominator()=" + r.getDenominator());
     }
 
+    public static int lcm(int a, int b) {
+	return ((Math.abs(a * b)) / gcd(a,b));
+    }
+    
+    public Rational plus(Rational r) {
+	int commonDenom = lcm(this.denom, r.denom);
+	int num1 = this.num * (commonDenom/this.denom);
+	int num2 = r.num * (commonDenom/r.denom);
+	int sum = num1 + num2;
+        return new Rational(sum, commonDenom);
+    }
+    
+    public static Rational sum(Rational a, Rational b) { 
+	int commonDenom = lcm(a.denom, b.denom);
+	int num1 = a.num * (commonDenom/a.denom);
+	int num2 = b.num * (commonDenom/b.denom);
+	return new Rational(num1 + num2, commonDenom);
+	
+    }
+
+    public Rational minus(Rational r) {
+	Rational m = new Rational(-1,1);
+	return sum(this, product(m,r));
+    }
+	    
+    public static Rational difference(Rational a, Rational b) { 
+	Rational m = new Rational(-1,1);
+	return sum(a, product(m,b));
+    }
+	    
+    public Rational reciprocalOf() { //how to write test for expected error 
+	if (this.num == 0) {
+	    throw new ArithmeticException("Numerator may not be 0");
+	}
+	Rational temp = new Rational(this.denom, this.num);
+	return temp;
+    }
+    
+    public Rational dividedBy(Rational r) { 
+    	return product(this, r.reciprocalOf());
+    }
+
+    public static Rational quotient(Rational a, Rational b) { //write tests
+	return product(a, b.reciprocalOf());
+    }
+
+    
+
     
 }
