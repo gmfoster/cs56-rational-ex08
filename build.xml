@@ -50,7 +50,7 @@
   </target>
 
   <property name="javadoc_absolute_path" location="javadoc"/>
-  <property name="public_javadoc_path" location="cs56/lab01=javadoc-gmfoster/javadoc"/>
+  <property name="public_javadoc_path" location="../../lab01-javadoc-gmfoster/javadoc"/>
   
   <target name="javadoc" depends="compile" description="generate javadoc">
     <delete quiet="true">
